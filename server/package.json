@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^2.19.2"
+  },
+  "devDependencies": {
+    "prisma": "^2.16.1"
   }
 }
