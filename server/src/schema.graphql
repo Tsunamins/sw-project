@@ -1,6 +1,11 @@
 type Query {
   findUser: User
+#   uploads: [File]
   
+}
+
+type Mutation {
+  singleUpload(file: Upload!): File!
 }
 
 type User {
@@ -8,6 +13,12 @@ type User {
   username: String!
   name: String!
   email: String!
-  photo: File
+  photo: File!
+}
+
+type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
 }
 
