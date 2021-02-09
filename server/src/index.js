@@ -11,24 +11,16 @@ const resolvers = {
 
 const prisma = new PrismaClient()
 
-const server = new ApolloServer ({
+const server = new ApolloServer({
     typeDefs: fs.readFileSync(
-        path.join(__dirname, 'schema.graphql'),
-        'utf8'
+      path.join(__dirname, 'schema.graphql'),
+      'utf8'
     ),
     resolvers,
-    context: ({ req }) => {
-        return {
-            ...req,
-            prisma,
-            userId:
-            req && req.headers.authorization
-            ? getUserId(req)
-            : null
-        };
-        
+    context: {
+      prisma,
     }
-});
+  })
 
 server
     .listen()
