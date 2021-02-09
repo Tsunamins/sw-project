@@ -1,0 +1,13 @@
+type Query {
+  findUser: User
+  
+}
+
+type User {
+  id: ID!
+  username: String!
+  name: String!
+  email: String!
+  photo: File
+}
+
