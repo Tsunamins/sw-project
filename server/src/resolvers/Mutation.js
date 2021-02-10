@@ -1,6 +1,14 @@
+const Mutation = require('./resolvers/Mutation');
+
 function singleUpload(parent, args, context) {
     return args.file.then(file => {
         
+        const {createReadStream, filename, mimetype} = file
+        
+        const fileStream = createReadStream()
+        
+        fileStream.pipe(fs.createWriteStream(`../../images/${filename}`))
+
         return file;
       });
 }
@@ -20,7 +28,11 @@ async function newUser(parent, args, context) {
 } 
 
 
+
+
   
   module.exports = {
     singleUpload, newUser,
   }
+
+
