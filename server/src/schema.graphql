@@ -1,19 +1,19 @@
 type Query {
   findUser: User
-#   uploads: [File]
-  
+  allUsers: [User!]!
 }
 
-type Mutation {
-  singleUpload(file: Upload!): File!
-}
+ type Mutation {
+   singleUpload(file: Upload!): File!
+   newUser(username: String!, name: String!, email: String!, password: String, photo: String): User
+ }
 
 type User {
   id: ID!
   username: String!
   name: String!
   email: String!
-  photo: File!
+  photo: String
 }
 
 type File {
