@@ -3,8 +3,12 @@ function findUser(parent, args, context) {
     //findUser: (_, { id }) => users.find((u) => u.id === id),
 }
 
+function allUsers(parent, args, context, info) {
+    return context.prisma.user.findMany()
+  }
+
 
   
   module.exports = {
-    findUser,
+    findUser, allUsers,
   }
