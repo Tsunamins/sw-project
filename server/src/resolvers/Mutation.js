@@ -5,8 +5,22 @@ function singleUpload(parent, args, context) {
       });
 }
 
+async function newUser(parent, args, context) {
+    return await context.prisma.user.create({
+        data: {
+            username: args.username,
+            name: args.name,
+            email: args.email,
+            password: args.password,
+            photo: args.photo
+            
+        }
+    })
+ 
+} 
+
 
   
   module.exports = {
-    singleUpload,
+    singleUpload, newUser,
   }
