@@ -1,4 +1,4 @@
-const Mutation = require('./resolvers/Mutation');
+const fs = require('fs');
 
 function singleUpload(parent, args, context) {
     return args.file.then(file => {
@@ -7,7 +7,7 @@ function singleUpload(parent, args, context) {
         
         const fileStream = createReadStream()
         
-        fileStream.pipe(fs.createWriteStream(`../../images/${filename}`))
+        fileStream.pipe(fs.createWriteStream(`./images/${filename}`))
 
         return file;
       });
