@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const APP_SECRET = env("APP_SECRET");
+const dotenv = require('dotenv').config()
+const APP_SECRET = process.env.APP_SECRET
 
 
 function getTokenPayload(token) {
