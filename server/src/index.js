@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client')
 const fs = require('fs');
 const path = require('path');
 const Query = require('./resolvers/Query');
-const Mutation = require('./resolvers/Mutation');
+const Mutation = require('./resolvers/Mutation')
 
 
 const resolvers = {
