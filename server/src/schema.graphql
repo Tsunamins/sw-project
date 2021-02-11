@@ -1,20 +1,26 @@
 type Query {
-  findUser: User
-  allUsers: [User!]!
-  uploads: [File]
+    findUser: User
+    allUsers: [User!]!
+    uploads: [File]
 }
 
- type Mutation {
-   singleUpload(file: Upload!): File!
-   newUser(username: String!, name: String!, email: String!, password: String, photo: String): User
+type Mutation {
+    singleUpload(file: Upload!): File!
+    signup(email: String!, password: String!, name: String!): AuthPayload
+    login(email: String!, password: String!): AuthPayload
  }
 
+type AuthPayload {
+    token: String
+    user: User
+}
+
 type User {
-  id: ID!
-  username: String!
-  name: String!
-  email: String!
-  photo: String
+    id: ID!
+    username: String!
+    name: String!
+    email: String!
+    photo: String
 }
 
 type File {
@@ -25,4 +31,6 @@ type File {
     #uploadedBy: User
 
 }
+
+
 
