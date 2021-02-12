@@ -14,58 +14,61 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-//note handlesubmit
-
 const Login = () => {
-    const history = useHistory();
-    const [formState, setFormState] = useState({
-      email: '',
-      password: '',
-    });
+  const history = useHistory();
+  const [formState, setFormState] = useState({
 
-    const [login] = useMutation(LOGIN_MUTATION, {
-        variables: {
-          email: formState.email,
-          password: formState.password
-        },
-        onCompleted: ({ login }) => {
-          localStorage.setItem(AUTH_TOKEN, login.token);
-          history.push('/');
-        }
-      });
+    email: '',
+    password: '',
 
-    return (
-       
-        <div className='form'>
-          <form onSubmit={login}>
+  });
 
-              
-              
-              <br/>
-              <label>Email</label><br/>
-              <input type="text"
-                     value={formState.email}
-                     onChange={e => setFormState(e.target.value)}
-                     placeholder='Email'
-              />
+  const [login] = useMutation(LOGIN_MUTATION, {
+    variables: {
+      email: formState.email,
+      password: formState.password
+    },
+    onCompleted: ({ login }) => {
+      localStorage.setItem(AUTH_TOKEN, login.token);
+      history.push('/');
+    }
+  });
 
-              
-              <br/>
-              <label>Password</label><br/>
-              <input type="password"
-                     value={formState.password}
-                     onChange={e => setFormState(e.target.value)}
-                     placeholder='Password'
-              />
-              
-              
-              <br/>
+
+  return (
+    <div>
     
-              <input className="button" type="submit" value="Submit" />
-  
-          </form>
+      <div>
+      
+        <input
+          value={formState.email}
+          onChange={(e) =>
+            setFormState({
+              ...formState,
+              email: e.target.value
+            })
+          }
+          type="text"
+          placeholder="Email"
+        />
+        <input
+          value={formState.password}
+          onChange={(e) =>
+            setFormState({
+              ...formState,
+              password: e.target.value
+            })
+          }
+          type="password"
+          placeholder="Password"
+        />
       </div>
-    );
-  }
+      <div>
+        <button onClick={login}>Login</button>
 
-  export default Login;
+      </div>
+    </div>
+  );
+};
+
+export default Login;
