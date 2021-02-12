@@ -30,6 +30,12 @@ const Login = () => {
     },
     onCompleted: ({ login }) => {
       localStorage.setItem(AUTH_TOKEN, login.token);
+      setFormState({
+        ...formState,
+        email: "",
+        password: ""
+      })
+      //change later
       history.push('/');
     }
   });
@@ -51,6 +57,9 @@ const Login = () => {
           type="text"
           placeholder="Email"
         />
+
+        <br/>
+
         <input
           value={formState.password}
           onChange={(e) =>
@@ -63,10 +72,11 @@ const Login = () => {
           placeholder="Password"
         />
       </div>
+
       <div>
         <button onClick={login}>Login</button>
-
       </div>
+
     </div>
   );
 };
