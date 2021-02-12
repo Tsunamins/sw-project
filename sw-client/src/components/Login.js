@@ -9,7 +9,13 @@ const LOGIN_MUTATION = gql`
     $password: String!
   ) {
     login(email: $email, password: $password) {
-      token
+      token,
+      user{
+        email,
+        username,
+        name,
+        photo
+      }
     }
   }
 `;
@@ -29,6 +35,7 @@ const Login = () => {
       password: formState.password
     },
     onCompleted: ({ login }) => {
+      console.log(login)
       localStorage.setItem(AUTH_TOKEN, login.token);
       setFormState({
         ...formState,
