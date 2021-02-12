@@ -44,8 +44,8 @@ const Login = () => {
               <br/>
               <label>Email</label><br/>
               <input type="text"
-                     value={email}
-                     onChange={e => setEmail(e.target.value)}
+                     value={formState.email}
+                     onChange={e => setFormState(e.target.value)}
                      placeholder='Email'
               />
 
@@ -53,7 +53,7 @@ const Login = () => {
               <br/>
               <label>Password</label><br/>
               <input type="password"
-                     value={password}
+                     value={formState.password}
                      onChange={e => setFormState(e.target.value)}
                      placeholder='Password'
               />
