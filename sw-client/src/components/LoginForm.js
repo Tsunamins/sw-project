@@ -19,14 +19,12 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
-
-const Login = () => {
+//login will take args, taking form state vars passing in to actions
+const LoginForm = () => {
   const history = useHistory();
   const [formState, setFormState] = useState({
-
     email: '',
     password: '',
-
   });
 
   const [login] = useMutation(LOGIN_MUTATION, {
@@ -37,16 +35,20 @@ const Login = () => {
     onCompleted: ({ login }) => {
       console.log(login)
       localStorage.setItem(AUTH_TOKEN, login.token);
-      setFormState({
-        ...formState,
-        email: "",
-        password: ""
-      })
-      //change later
-      history.push('/');
-    }
-  });
+   
+     }
+  }); 
+  
+  const handleClick = () => {
+    login()
+    setFormState({
+      ...formState,
+      email: "",
+      password: ""
+    })
+    history.push('/');
 
+  }
 
   return (
     <div>
@@ -81,11 +83,11 @@ const Login = () => {
       </div>
 
       <div>
-        <button onClick={login}>Login</button>
+        <button onClick={handleClick}>Login</button>
       </div>
 
     </div>
   );
 };
 
-export default Login;
+export default LoginForm;
