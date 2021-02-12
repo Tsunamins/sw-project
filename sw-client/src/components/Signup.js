@@ -5,9 +5,12 @@ import { AUTH_TOKEN } from '../constants';
 
 const SIGNUP_MUTATION = gql`
   mutation SignupMutation(
-    $email: String!
-    $password: String!
     $name: String!
+    $username: String!
+    $email: String!
+    $photo: String
+    $password: String!
+    
   ) {
     signup(
       name: $name
@@ -55,16 +58,16 @@ const Signup = () => {
         <div className='form'>
           <form onSubmit={handleSubmit}>
 
-              <label>Username</label><br/>
+              <label>Name</label><br/>
               <input type="text" 
-                     value={username}
+                     value={formState.name}
                      onChange={e => setFormState(e.target.value)}
-                     placeholder='Username'
+                     placeholder='Name'
               />
 
               <label>Username</label><br/>
               <input type="text" 
-                     value={username}
+                     value={formState.username}
                      onChange={e => setFormState(e.target.value)}
                      placeholder='Username'
               />
@@ -72,8 +75,8 @@ const Signup = () => {
               <br/>
               <label>Email</label><br/>
               <input type="text"
-                     value={email}
-                     onChange={e => setEmail(e.target.value)}
+                     value={formState.email}
+                     onChange={e => setFormState(e.target.value)}
                      placeholder='Email'
               />
 
@@ -82,20 +85,15 @@ const Signup = () => {
               <br/>
               <label>Password</label><br/>
               <input type="password"
-                     value={password1}
+                     value={formState.password}
                      onChange={e => setFormState(e.target.value)}
                      placeholder='Password'
               />
               
               <br/>
-              <label>Confirm Password</label><br/>
-              <input type="password"
-                     value={password2}
-                     onChange={e => setFormState(e.target.value)}
-                     placeholder='Enter same password'
-              />
+             
   
-              <br/>
+       
     
               <input className="button" type="submit" value="Submit" />
   
