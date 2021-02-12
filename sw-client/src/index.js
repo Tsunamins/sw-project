@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AUTH_TOKEN } from './constants';
 import reportWebVitals from './reportWebVitals';
 import {
   ApolloProvider,
@@ -9,6 +9,8 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
+import './styles/index.css';
+import App from './App';
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000'
@@ -21,9 +23,11 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+  <Router>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Router>
   ,
   document.getElementById('root')
 );
