@@ -3,29 +3,6 @@ import { gql, useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
 
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation(
-    $name: String!
-    $username: String!
-    $email: String!
-    $photo: String
-    $password: String!
-    
-  ) {
-    signup(
-      name: $name
-      username: $username
-      email: $email
-      photo: $photo
-      password: $password
-      
-    ) {
-      token
-    }
-  }
-`;
-
-//note handlesubmit
 
 const Signup = () => {
     const history = useHistory();
@@ -38,66 +15,102 @@ const Signup = () => {
     
     });
 
-    const [signup] = useMutation(SIGNUP_MUTATION, {
-        variables: {
-          name: formState.name,
-          username: formState.username,
-          email: formState.email,
-          photo: formState.photo,
-          password: formState.password
-        },
-        //note
-        onCompleted: ({ signup }) => {
-          localStorage.setItem(AUTH_TOKEN, signup.token);
-          history.push('/');
-        }
-    });
+    const handleClick = () => {
+      const data = {
+        email: formState.email,
+        password: formState.password
+      }
+  
+        signup(data)
+     
+      setFormState({
+        ...formState,
+        name: "",
+        username: "",
+        email: "",
+        photo: "",
+        password: ""
+      })
+      history.push('/');
+  
+    }
 
     return (
-       
-        <div className='form'>
-          <form onSubmit={handleSubmit}>
-
-              <label>Name</label><br/>
-              <input type="text" 
-                     value={formState.name}
-                     onChange={e => setFormState(e.target.value)}
-                     placeholder='Name'
+        <div>
+          <div>
+             <input  
+                    value={formState.name}
+                    onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        name: e.target.value
+                      })}
+                    placeholder='Name'
+                    type="text"
               />
 
-              <label>Username</label><br/>
-              <input type="text" 
+              <br/>
+
+              <input  
                      value={formState.username}
-                     onChange={e => setFormState(e.target.value)}
+                     onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        username: e.target.value
+                      })}
                      placeholder='Username'
+                     type="text"
               />
               
               <br/>
-              <label>Email</label><br/>
-              <input type="text"
+              
+              <input 
                      value={formState.email}
-                     onChange={e => setFormState(e.target.value)}
+                     onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        email: e.target.value
+                      })}
                      placeholder='Email'
+                     type="text"
+              />
+              
+              <br/>
+
+              <input 
+                     value={formState.photo}
+                     onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        photo: e.target.value
+                      })}
+                     placeholder='Photo'
+                     type="text"
+              />
+                 
+              <br/>
+
+              <input 
+                     value={formState.password}
+                     onChange={(e) =>
+                      setFormState({
+                        ...formState,
+                        email: e.target.value
+                      })}
+                     placeholder='Password'
+                     type="password"
               />
 
-              {/* note photo upload area */}
-              
-              <br/>
-              <label>Password</label><br/>
-              <input type="password"
-                     value={formState.password}
-                     onChange={e => setFormState(e.target.value)}
-                     placeholder='Password'
-              />
-              
-              <br/>
+              </div>
+           
              
-  
+              <div>
+                <button onClick={handleClick}>Login</button>
+              </div>  
        
-    
               <input className="button" type="submit" value="Submit" />
   
-          </form>
+        
       </div>
     );
   }
