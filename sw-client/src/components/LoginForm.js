@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
 import { LOGIN_MUTATION } from '../store/mutations'
+import { login } from '../store/authActions'
 
 
 //start adding store, actions, reducers
@@ -14,20 +15,18 @@ const LoginForm = () => {
     password: '',
   });
 
-  const [login] = useMutation(LOGIN_MUTATION, {
+  const [loginGql] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password
     },
-    onCompleted: ({ login }) => {
-      console.log(login)
-      localStorage.setItem(AUTH_TOKEN, login.token);
-   
+    onCompleted: ({ loginGql }) => {
+      login(loginGql)
      }
   }); 
   
   const handleClick = () => {
-    login()
+    loginGql()
     setFormState({
       ...formState,
       email: "",
