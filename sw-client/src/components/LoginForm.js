@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+//import { connect } from 'react-redux'
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
 import { LOGIN_MUTATION } from '../store/mutations'
-import { login } from '../store/authActions'
+import { loginUser } from '../store/authActions'
 
 
 //start adding store, actions, reducers
@@ -15,18 +16,20 @@ const LoginForm = () => {
     password: '',
   });
 
-  const [loginGql] = useMutation(LOGIN_MUTATION, {
+  const [login] = useMutation(LOGIN_MUTATION, {
     variables: {
       email: formState.email,
       password: formState.password
     },
-    onCompleted: ({ loginGql }) => {
-      login(loginGql)
+    onCompleted: ({ login }) => {
+      console.log(login)
+      loginUser(login)
      }
   }); 
   
   const handleClick = () => {
-    loginGql()
+    login()
+   
     setFormState({
       ...formState,
       email: "",
@@ -76,4 +79,5 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+//export default connect(null, {loginUser})(LoginForm);
+export default LoginForm
