@@ -11,6 +11,7 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
+import { Provider } from 'react-redux'
 import store from './store/store.js'
 import './styles/index.css';
 import App from './App';
