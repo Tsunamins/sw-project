@@ -11,6 +11,7 @@ import {
   createHttpLink,
   InMemoryCache
 } from '@apollo/client';
+import store from './store/store.js'
 import './styles/index.css';
 import App from './App';
 
@@ -38,7 +39,9 @@ const client = new ApolloClient({
 ReactDOM.render(
   <Router>
     <ApolloProvider client={client}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </Router>
   ,
