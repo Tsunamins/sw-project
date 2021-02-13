@@ -3,8 +3,7 @@ import { AUTH_TOKEN } from '../constants';
 export const login = () => {
     //return dispatch => {
 
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+       
 
         var graphql = JSON.stringify({
         query: "mutation {\n  login(email: \"graycie@sobe.com\", password: \"password\") {\n    token\n    user {\n      email\n      username\n      name\n     \n      }\n    }\n  }",
@@ -12,7 +11,10 @@ export const login = () => {
         })
         var requestOptions = {
         method: 'POST',
-        headers: myHeaders,
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
         body: graphql,
         redirect: 'follow'
         };
