@@ -1,25 +1,12 @@
 import React, { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
 import { AUTH_TOKEN } from '../constants';
+import { LOGIN_MUTATION } from '../store/mutations'
 
-const LOGIN_MUTATION = gql`
-  mutation LoginMutation(
-    $email: String!
-    $password: String!
-  ) {
-    login(email: $email, password: $password) {
-      token,
-      user{
-        email,
-        username,
-        name,
-        photo
-      }
-    }
-  }
-`;
-//login will take args, taking form state vars passing in to actions
+
+//start adding store, actions, reducers
+
 const LoginForm = () => {
   const history = useHistory();
   const [formState, setFormState] = useState({
