@@ -1,30 +1,26 @@
 import { AUTH_TOKEN } from '../constants';
 
-export const login = () => {
-    //return dispatch => {
-
-       
-
-        var graphql = JSON.stringify({
-        query: "mutation {\n  login(email: \"graycie@sobe.com\", password: \"password\") {\n    token\n    user {\n      email\n      username\n      name\n     \n      }\n    }\n  }",
-        variables: {}
+export const login = (data) => {
+      return dispatch => {
+          fetch("http://localhost:4000/", {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                query: "mutation {\n  login(email: \"graycie@sobe.com\", password: \"password\") {\n    token\n    user {\n      email\n      username\n      name\n     \n      }\n    }\n  }",
+                variables: {}
+            })
         })
-        var requestOptions = {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: graphql,
-        redirect: 'follow'
-        };
 
-        fetch("http://localhost:4000/", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
+        
+        .then(resp => resp.json())
+        .then(response => console.log(response.data.login.user))
+        .then(response => dispatch(session(response.data.login.user)))
         .catch(error => console.log('error', error));
 
-    //}
+    }
 }
 
 
