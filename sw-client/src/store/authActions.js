@@ -17,7 +17,7 @@ export const login = (user) => {
 
 export const sessionUser = user => {
     return {
-        type: "CURRENT_USER"
+        type: "SESSION_USER"
     }
 }
 
