@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
-import { AUTH_TOKEN } from '../constants';
-import { LOGIN_MUTATION } from '../store/mutations'
-import { loginUser } from '../store/authActions'
-
-
-//start adding store, actions, reducers
+import { login } from '../store/authActions'
 
 const LoginForm = () => {
   const history = useHistory();
@@ -16,19 +11,13 @@ const LoginForm = () => {
     password: '',
   });
 
-  const [login] = useMutation(LOGIN_MUTATION, {
-    variables: {
+  const handleClick = () => {
+    const data = {
       email: formState.email,
       password: formState.password
-    },
-    onCompleted: ({ login }) => {
-      console.log(login)
-      loginUser(login)
-     }
-  }); 
-  
-  const handleClick = () => {
-    login()
+    }
+
+    login(data)
    
     setFormState({
       ...formState,
@@ -40,10 +29,8 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-    
+    <div> 
       <div>
-      
         <input
           value={formState.email}
           onChange={(e) =>
@@ -79,5 +66,5 @@ const LoginForm = () => {
   );
 };
 
-//export default connect(null, {loginUser})(LoginForm);
-export default LoginForm
+export default connect(null, {fetchLogin})(LoginForm);
+//export default LoginForm
