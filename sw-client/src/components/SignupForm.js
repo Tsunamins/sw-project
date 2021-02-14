@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
-import { AUTH_TOKEN } from '../constants';
+import { signup } from '../store/authActions'
 
-
-const Signup = () => {
+const SignupForm = () => {
     const history = useHistory();
     const [formState, setFormState] = useState({
       name: '',
@@ -34,6 +33,8 @@ const Signup = () => {
       history.push('/');
   
     }
+
+
 
     return (
         <div>
@@ -105,7 +106,7 @@ const Signup = () => {
            
              
               <div>
-                <button onClick={handleClick}>Login</button>
+                <button onClick={handleClick}>Signup</button>
               </div>  
        
               <input className="button" type="submit" value="Submit" />
@@ -115,6 +116,6 @@ const Signup = () => {
     );
   }
 
-  export default Signup;
+  export default SignupForm;
 
 //work with mutation as action, import action
