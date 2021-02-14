@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useHistory } from 'react-router';
-import { signup } from '../store/authActions'
+import { auth } from '../store/authActions'
+import { signupMutation } from '../store/mutations'
 
 const SignupForm = () => {
     const history = useHistory();
@@ -14,13 +15,18 @@ const SignupForm = () => {
     
     });
 
-    const handleClick = () => {
+    const handleClick = (props) => {
       const data = {
+        name: formState.name,
+        username: formState.username,
         email: formState.email,
+        photo: formState.photo,
         password: formState.password
       }
+
+      const query = signupMutation(data)
   
-        signup(data)
+      props.auth(data)
      
       setFormState({
         ...formState,
