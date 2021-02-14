@@ -11,7 +11,7 @@ function singleUpload(parent, args, context) {
         const fileStream = createReadStream()
         
         fileStream.pipe(fs.createWriteStream(`./images/${filename}`))
-
+       
         return file;
       });
 }
