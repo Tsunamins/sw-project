@@ -70,4 +70,3 @@ const LoginForm = (props) => {
 };
 
 export default connect(null, { auth })(LoginForm);
-//export default LoginForm
