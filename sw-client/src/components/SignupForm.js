@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { gql, useMutation } from '@apollo/client';
-import { auth } from '../store/authActions'
+import { auth, upload } from '../store/authActions'
 import { signupMutation } from '../store/mutations'
-import { tempSignup } from '../store/authActions'
 
 const SignupForm = (props) => {
     const [formState, setFormState] = useState({
@@ -11,6 +10,7 @@ const SignupForm = (props) => {
       username: '',
       email: '',
       photo: '',
+      selectedFile: '',
       password: '',
     
     });
@@ -20,25 +20,26 @@ const SignupForm = (props) => {
         name: formState.name,
         username: formState.username,
         email: formState.email,
-        photo: formState.photo,
+        photo: formState.selectedFile.name,
         password: formState.password
       }
+
+      upload(formState.selectedFile, formState.selectedFile.name)
 
       const mut = signupMutation(data)
   
       props.auth(mut)
 
-      //tempSignup()
-     
       setFormState({
         ...formState,
         name: "",
         username: "",
         email: "",
         photo: "",
+        selectedFile: "",
         password: ""
       })
-      props.history.push('/');
+      props.history.push('/profile');
   
     }
 
@@ -86,17 +87,17 @@ const SignupForm = (props) => {
               
               <br/>
 
-              <input 
-                     value={formState.photo}
-                     onChange={(e) =>
-                      setFormState({
-                        ...formState,
-                        photo: e.target.value
-                      })}
-                     placeholder='Photo'
-                     type="text"
+              <input
+                  type="file"
+                  // value={formState.selectedFile}
+                  // onChange={(e) => setSelectedFile(e.target.files[0])}
+                  onChange={(e) =>
+                    setFormState({
+                      ...formState,
+                      selectedFile: e.target.files[0]
+                    })}
               />
-                 
+            
               <br/>
 
               <input 
