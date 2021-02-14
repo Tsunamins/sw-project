@@ -1,6 +1,6 @@
 import { AUTH_TOKEN } from '../constants';
 
-export const login = (data) => {
+export const login = (query) => {
       return dispatch => {
           fetch("http://localhost:4000/", {
             headers: {
@@ -9,7 +9,7 @@ export const login = (data) => {
             },
             method: 'POST',
             body: JSON.stringify({
-                query: "mutation {\n  login(email: \"graycie@sobe.com\", password: \"password\") {\n    token\n    user {\n      email\n      username\n      name\n     \n      }\n    }\n  }",
+                query: query,
                 variables: {}
             })
         })
@@ -18,6 +18,7 @@ export const login = (data) => {
         .then(resp => resp.json())
         .then(response => {
             if(response.error){
+                console.log(response)
                 alert(response.error)
             } else {
                 console.log(response.data.login.user)
