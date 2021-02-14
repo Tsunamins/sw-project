@@ -22,7 +22,7 @@ export const login = (query) => {
                 alert(response.error)
             } else {
                 console.log(response.data.login.user)
-                //local storage
+                localStorage.setItem(AUTH_TOKEN, response.data.login.user.token);
                 //maybe separate dispatch for token
                 dispatch(session(response.data.login.user))
             }
