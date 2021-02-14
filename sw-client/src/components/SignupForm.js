@@ -102,7 +102,7 @@ const SignupForm = () => {
                      onChange={(e) =>
                       setFormState({
                         ...formState,
-                        email: e.target.value
+                        password: e.target.value
                       })}
                      placeholder='Password'
                      type="password"
@@ -119,6 +119,5 @@ const SignupForm = () => {
     );
   }
 
-  export default SignupForm;
+  export default connect(null, { auth })(SignupForm);
 
-//work with mutation as action, import action
