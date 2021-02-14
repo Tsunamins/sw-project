@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
-import { useMutation } from '@apollo/client';
+import { useMutation, gql } from '@apollo/client';
 import { useHistory } from 'react-router';
 import { login } from '../store/authActions'
+import {customMutation} from '../store/mutations'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const history = useHistory();
   const [formState, setFormState] = useState({
     email: '',
@@ -16,8 +17,10 @@ const LoginForm = () => {
       email: formState.email,
       password: formState.password
     }
-
-    login(data)
+    const query = customMutation(data)
+    console.log(query)
+    props.login(query)
+   
    
     setFormState({
       ...formState,
@@ -66,5 +69,5 @@ const LoginForm = () => {
   );
 };
 
-export default connect(null, {fetchLogin})(LoginForm);
+export default connect(null, {login})(LoginForm);
 //export default LoginForm
