@@ -42,7 +42,7 @@ const SIGNUP_MUTATION = gql`
   }
 `;
 
-export const customMutation = (data) => {
+export const loginMutation = (data) => {
   const query = `mutation {
         login(email: "${data.email}", password: "${data.password}") {
           token
@@ -50,6 +50,23 @@ export const customMutation = (data) => {
             email
             username
             name
+            photo
+           
+            }
+          }
+        }`
+        return query
+}
+
+export const signupMutation = (data) => {
+  const query = `mutation {
+        signup(name: "${data.name}", username: "${data.username}", email: "${data.email}", photo: "${data.photo}:, password: "${data.password}") {
+          token
+          user {
+            email
+            username
+            name
+            photo
            
             }
           }
