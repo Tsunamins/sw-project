@@ -17,12 +17,15 @@ function singleUpload(parent, args, context) {
 }
 
 async function signup(parent, args, context, info){
+    console.log("attempting signup")
     const password = await bcrypt.hash(args.password, 10)
 
     const user = await context.prisma.user.create({ data: { ...args, password } })
 
     const token = jwt.sign({ userId: user.id }, APP_SECRET)
-
+    console.log(user)
+   
+    console.log(token)
     return {
         token,
         user
