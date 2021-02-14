@@ -25,7 +25,7 @@ const LoginForm = (props) => {
       password: ""
     })
 
-    props.history.push('/');
+    props.history.push('/profile');
 
   }
 
