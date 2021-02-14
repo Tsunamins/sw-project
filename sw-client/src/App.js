@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Redirect, Route, Switch } from 'react-router-dom';
 import LoginForm from './components/LoginForm'
+import Nav from './containers/Nav'
 import './styles/App.css';
 
 
@@ -14,7 +15,8 @@ class App extends React.Component {
 
   return (
     <div className="App">
-      <LoginForm />
+      <Nav />
+      
     </div>
   );
   }
