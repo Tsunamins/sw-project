@@ -16,8 +16,8 @@ const LoginForm = (props) => {
       password: formState.password
     }
 
-    const query = loginMutation(data)
-    props.auth(query)
+    const mut = loginMutation(data)
+    props.auth(mut)
    
     setFormState({
       ...formState,
