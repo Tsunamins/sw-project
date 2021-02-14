@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { gql, useMutation } from '@apollo/client';
 import { auth } from '../store/authActions'
 import { signupMutation } from '../store/mutations'
+import { tempSignup } from '../store/authActions'
 
 const SignupForm = (props) => {
-  console.log(props)
     const [formState, setFormState] = useState({
       name: '',
       username: '',
@@ -24,9 +24,11 @@ const SignupForm = (props) => {
         password: formState.password
       }
 
-      const query = signupMutation(data)
+      const mut = signupMutation(data)
   
-      props.auth(data)
+      props.auth(mut)
+
+      //tempSignup()
      
       setFormState({
         ...formState,
