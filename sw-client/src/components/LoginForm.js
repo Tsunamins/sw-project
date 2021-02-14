@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { useMutation, gql } from '@apollo/client';
-import { useHistory } from 'react-router';
 import { auth } from '../store/authActions'
 import { loginMutation } from '../store/mutations'
 
 const LoginForm = (props) => {
-  const history = useHistory();
   const [formState, setFormState] = useState({
     email: '',
     password: '',
@@ -27,7 +25,7 @@ const LoginForm = (props) => {
       password: ""
     })
 
-    history.push('/');
+    props.history.push('/');
 
   }
 
