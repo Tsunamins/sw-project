@@ -113,10 +113,7 @@ const SignupForm = () => {
              
               <div>
                 <button onClick={handleClick}>Signup</button>
-              </div>  
-       
-              <input className="button" type="submit" value="Submit" />
-  
+              </div>    
         
       </div>
     );
