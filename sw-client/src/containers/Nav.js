@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 class Nav extends React.Component {
   
     render(){
-      console.log(this.props)
+      const session = this.props.session
       return (
           <div id="Nav" >
                 <div>
@@ -14,12 +14,19 @@ class Nav extends React.Component {
                     <Link to="/profile">Profile</Link> 
 
                 </div>
-                
-                <div id="AuthLinks">
-                    <Link to="/signup">Sign Up</Link> |
-                    <Link to="/login">Log In</Link>
-                </div> 
-
+                {console.log(session === null)}
+                {!session ?
+                 <div id="AuthLinks">
+                  <Link to="/signup">Sign Up</Link> |
+                  <Link to="/login">Log In</Link>
+                 </div>
+               
+                :
+               
+                <div>
+                    <Link to="/logout">Logout</Link>
+                </div>
+                }
         </div>
       );
     }
