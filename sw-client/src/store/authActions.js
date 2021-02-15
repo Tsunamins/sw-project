@@ -1,6 +1,6 @@
 import { AUTH_TOKEN } from '../constants';
 
-export const auth = (mut) => {
+export const auth = (mutate) => {
       return dispatch => {
           fetch("http://localhost:4000/", {
             headers: {
@@ -8,7 +8,7 @@ export const auth = (mut) => {
                 "Accept": "application/json"
             },
             method: 'POST',
-            body: mut,
+            body: mutate,
             redirect: 'follow'
         })
 
@@ -18,7 +18,6 @@ export const auth = (mut) => {
                 console.log("if error:", response)
                 alert(response.errors)
             } else {
-                console.log(response)
                 if(!response.data.login.user){
                     console.log(response.data.signup.user)
                     localStorage.setItem(AUTH_TOKEN, response.data.signup.user.token);
@@ -37,9 +36,6 @@ export const auth = (mut) => {
 }
 
 export const upload = (file, photo) => {
-    console.log(file)
-    console.log(photo)
-
     let formdata = new FormData();
     formdata.append("operations", "{ \"query\": \"mutation ($file: Upload!) { singleUpload(file: $file) {filename} }\", \"variables\": { \"file\": null } }");
     formdata.append("map", "{ \"0\": [\"variables.file\"] }");
@@ -60,11 +56,24 @@ export const upload = (file, photo) => {
 
 }
 
+
+
+
+
+
+
+
     export const session = user => {
-        console.log(user)
         return {
             type: "SESSION_USER",
             user
+        }
+    }
+
+    export const logout = () => {
+        localStorage.removeItem("AUTH_TOKEN")
+        return {
+            type: "END_SESSION"
         }
     }
 
