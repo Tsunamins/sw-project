@@ -15,7 +15,7 @@ const Welcome = (props) => {
     :
         
         <div><Link to="/signup">Sign Up</Link> |
-            <Link to="/login">Log In</Link>
+             <Link to="/login">Log In</Link>
         </div>
     }
     </div>
