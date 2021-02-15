@@ -71,7 +71,8 @@ export const upload = (file, photo) => {
     }
 
     export const logout = () => {
-        localStorage.removeItem("AUTH_TOKEN")
+        console.log("logout triggered")
+        localStorage.clear()
         return {
             type: "END_SESSION"
         }
