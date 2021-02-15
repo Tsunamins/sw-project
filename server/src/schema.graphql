@@ -1,7 +1,8 @@
 type Query {
-    findUser: User
+    findLoggedIn: User
     allUsers: [User!]!
     uploads: [File]
+    findUser(id: Int): User
 }
 
 type Mutation {
