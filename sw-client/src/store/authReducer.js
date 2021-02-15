@@ -9,6 +9,8 @@ export default function auth(state = initialState, action) {
             return {...state,
                 current: action.user
             };
+        case 'END_SESSION':
+            return initialState
         default:
             return initialState
     }
