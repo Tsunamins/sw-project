@@ -1,5 +1,5 @@
 export const loginMutation = (data) => {
-        const mut = JSON.stringify({
+        const mutate = JSON.stringify({
           query: `mutation {
             login(email: "${data.email}", password: "${data.password}") {
               token
@@ -14,11 +14,11 @@ export const loginMutation = (data) => {
             }`,
           variables: {}
         })
-        return mut
+        return mutate
 }
 
 export const signupMutation = (data) => {
-  const mut = JSON.stringify({
+  const mutate = JSON.stringify({
     query: `mutation {
       signup(username: "${data.username}", name: "${data.name}", email: "${data.email}", photo: "${data.photo}", password: "${data.password}") {
         token
@@ -36,5 +36,5 @@ export const signupMutation = (data) => {
   })
 
 
-  return mut
+  return mutate
 }
