@@ -26,9 +26,9 @@ const SignupForm = (props) => {
 
       upload(formState.selectedFile, formState.selectedFile.name)
 
-      const mut = signupMutation(data)
+      const mutate = signupMutation(data)
   
-      props.auth(mut)
+      props.auth(mutate)
 
       setFormState({
         ...formState,
