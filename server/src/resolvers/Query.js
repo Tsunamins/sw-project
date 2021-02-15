@@ -1,18 +1,17 @@
+const fs = require('fs');
+
+
 function findUser(parent, args, context) {
-    return context.prisma.user.findUnique({ where: { id: parent.id } })
-    //findUser: (_, { id }) => users.find((u) => u.id === id),
+    return context.prisma.user.findUnique({ where: { id: args.id } })
+}
+
+function findLoggedInUser(parent, args, context) {
+  return context.prisma.user.findUnique({ where: { id: parent.id } })
 }
 
 function allUsers(parent, args, context, info) {
     return context.prisma.user.findMany()
   }
-
-//query all file uploads for now
-//correct only if creating a database space for the file names/paths/ and user associations
-
-function uploads(parent, args, context){
-    return context.prisma.file.findMany()
-}
 
 
 
@@ -20,5 +19,5 @@ function uploads(parent, args, context){
 
   
   module.exports = {
-    findUser, allUsers, 
+    findUser, allUsers, uploads, findFile
   }
