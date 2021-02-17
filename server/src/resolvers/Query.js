@@ -19,5 +19,5 @@ function allUsers(parent, args, context, info) {
 
   
   module.exports = {
-    findUser, allUsers, uploads, findFile
+    findUser, allUsers
   }

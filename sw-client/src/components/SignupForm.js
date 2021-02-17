@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { gql, useMutation } from '@apollo/client';
-import { auth, upload } from '../store/authActions'
+import { auth, upload, uploadStream } from '../store/authActions'
 import { signupMutation } from '../store/mutations'
 
 const SignupForm = (props) => {
@@ -15,6 +15,15 @@ const SignupForm = (props) => {
     
     });
 
+    const handleUpload = () => {
+      const uploadResp = uploadStream(formState.selectedFile, formState.selectedFile.name)
+      console.log(uploadResp)
+      
+      console.log(formState)
+    }
+
+
+
     const handleClick = () => {
       const data = {
         name: formState.name,
@@ -24,11 +33,11 @@ const SignupForm = (props) => {
         password: formState.password
       }
 
-      upload(formState.selectedFile, formState.selectedFile.name)
+      //upload(formState.selectedFile, formState.selectedFile.name)
 
-      const mutate = signupMutation(data)
+      //const mutate = signupMutation(data)
   
-      props.auth(mutate)
+      //props.auth(mutate)
 
       setFormState({
         ...formState,
@@ -96,7 +105,9 @@ const SignupForm = (props) => {
                       ...formState,
                       selectedFile: e.target.files[0]
                     })}
+                  
               />
+              <button onClick={handleUpload}>Upload Photo</button>
             
               <br/>
 
